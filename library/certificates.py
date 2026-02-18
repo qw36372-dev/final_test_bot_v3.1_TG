@@ -41,13 +41,13 @@ def register_fonts():
 
 def draw_decorative_border(c, width, height):
     """Рисует декоративную рамку сертификата."""
-    # Внешняя рамка - тёмно-синяя
-    c.setStrokeColor(colors.HexColor("#1a5490"))
+    # Внешняя рамка - тёмно-зелёная
+    c.setStrokeColor(colors.HexColor("#006400"))
     c.setLineWidth(3)
     c.rect(30, 30, width - 60, height - 60)
     
-    # Внутренняя рамка - светло-синяя
-    c.setStrokeColor(colors.HexColor("#4a90d9"))
+    # Внутренняя рамка - более светлый зелё
+    c.setStrokeColor(colors.HexColor("#2e8b57"))
     c.setLineWidth(1.5)
     c.rect(40, 40, width - 80, height - 80)
     
@@ -119,8 +119,8 @@ async def generate_certificate(test_state: CurrentTestState, user_id: int) -> io
     width, height = A4
     
     # === ФОН ===
-    # Светло-голубой градиент (имитация)
-    c.setFillColor(colors.HexColor("#f0f8ff"))
+    # светлый фон с лёгким зелёным оттенком
+    c.setFillColor(colors.HexColor("#f7fbf7"))
     c.rect(0, 0, width, height, fill=1, stroke=0)
     
     # Декоративная рамка
@@ -131,12 +131,12 @@ async def generate_certificate(test_state: CurrentTestState, user_id: int) -> io
     
     # === ЗАГОЛОВОК ===
     c.setFont(font, 32)
-    c.setFillColor(colors.HexColor("#1a5490"))
+    c.setFillColor(colors.HexColor("#006400"))
     c.drawCentredString(width / 2, height - 200, "СЕРТИФИКАТ")
     
     # Подзаголовок
     c.setFont(font, 14)
-    c.setFillColor(colors.HexColor("#333333"))
+    c.setFillColor(colors.HexColor("#555555"))
     c.drawCentredString(width / 2, height - 225, "о прохождении профессионального тестирования")
     
     # Разделительная линия
@@ -168,14 +168,14 @@ async def generate_certificate(test_state: CurrentTestState, user_id: int) -> io
     
     # Разделитель
     y_pos -= 10
-    c.setStrokeColor(colors.HexColor("#cccccc"))
+    c.setStrokeColor(colors.HexColor("#dddddd"))
     c.setLineWidth(1)
     c.line(100, y_pos, width - 100, y_pos)
     y_pos -= 30
     
     # === РЕЗУЛЬТАТЫ ТЕСТИРОВАНИЯ ===
     c.setFont(font, 13)
-    c.setFillColor(colors.HexColor("#1a5490"))
+    c.setFillColor(colors.HexColor("#006400"))
     c.drawCentredString(width / 2, y_pos, "РЕЗУЛЬТАТЫ ТЕСТИРОВАНИЯ")
     y_pos -= 30
     
@@ -219,7 +219,7 @@ async def generate_certificate(test_state: CurrentTestState, user_id: int) -> io
     footer_y = 120
     
     # Линия подписи
-    c.setStrokeColor(colors.HexColor("#1a5490"))
+    c.setStrokeColor(colors.HexColor("#006400"))
     c.setLineWidth(1)
     signature_line_width = 200
     signature_x = width / 2 - signature_line_width / 2
@@ -227,21 +227,21 @@ async def generate_certificate(test_state: CurrentTestState, user_id: int) -> io
     
     # Текст подписи
     c.setFont(font, 8)
-    c.setFillColor(colors.HexColor("#666666"))
+    c.setFillColor(colors.HexColor("#777777"))
     c.drawCentredString(width / 2, footer_y - 15, "ФССП РОССИИ")
     c.drawCentredString(width / 2, footer_y - 27, "Система тестирования профессиональной подготовки")
     
     # Дата и ID
     c.setFont(font, 8)
-    c.setFillColor(colors.HexColor("#999999"))
+    c.setFillColor(colors.HexColor("#777777"))
     date_str = datetime.now().strftime("%d.%m.%Y")
     c.drawString(80, 50, f"Дата выдачи: {date_str}")
     c.drawRightString(width - 80, 50, f"ID: {user_id}")
     
     # Telegram Bot метка
     c.setFont(font, 7)
-    c.setFillColor(colors.HexColor("#cccccc"))
-    c.drawCentredString(width / 2, 30, "Telegram Bot")
+    c.setFillColor(colors.HexColor("#bbbbbb"))
+    c.drawCentredString(width / 2, 50, "Telegram Bot")
     
     c.save()
     
